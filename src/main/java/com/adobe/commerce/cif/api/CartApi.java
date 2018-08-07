@@ -333,7 +333,7 @@ public interface CartApi {
 
     @POST
     @Path("/{id}/payments")
-    @ApiOperation(value = "Creates a payment for this shopping cart.")
+    @ApiOperation(value = "Adds a payment to this shopping cart.")
     @ApiResponses(value = {
         @ApiResponse(code = HTTP_OK, message = HTTP_OK_MESSAGE, response = Cart.class),
         @ApiResponse(code = HTTP_BAD_REQUEST, message = HTTP_BAD_REQUEST_MESSAGE, response = ErrorResponse.class),
