@@ -26,7 +26,7 @@ public class Payment extends ModelWithDates {
             "anonymous customer.")
     protected Customer customer;
 
-    @ApiModelProperty(value = "The method for this payment like Card or Cash.", required = true)
+    @ApiModelProperty(value = "The id of the payment method for this payment.", required = true)
     protected String method;
 
     @ApiModelProperty(value = "The value of the payment.")
