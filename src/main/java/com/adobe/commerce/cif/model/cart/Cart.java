@@ -160,6 +160,7 @@ public class Cart extends ModelWithDates {
      * @deprecated
      * @return payment Payment.
      */
+    @Deprecated
     public Payment getPayment() {
         return payment;
     }
@@ -168,6 +169,7 @@ public class Cart extends ModelWithDates {
      * @deprecated
      * @param payment Payment.
      */
+    @Deprecated
     public void setPayment(Payment payment) {
         this.payment = payment;
     }

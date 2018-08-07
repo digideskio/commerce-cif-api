@@ -310,9 +310,10 @@ public interface CartApi {
         @ApiParam(value = ACCEPT_LANGUAGE_DESC)
         @HeaderParam(ACCEPT_LANGUAGE) String acceptLanguage);
 
+    @Deprecated
     @POST
     @Path("/{id}/payment")
-    @ApiOperation(value = "Creates a payment for this shopping cart.")
+    @ApiOperation(value = "DEPRECATED. Creates a payment for this shopping cart.")
     @ApiResponses(value = {
         @ApiResponse(code = HTTP_OK, message = HTTP_OK_MESSAGE, response = Cart.class),
         @ApiResponse(code = HTTP_BAD_REQUEST, message = HTTP_BAD_REQUEST_MESSAGE, response = ErrorResponse.class),
@@ -321,6 +322,26 @@ public interface CartApi {
     })
     @Consumes(MediaType.APPLICATION_JSON)
     Cart postPayment(
+        @ApiParam(value = "The ID of the cart for which the payment will be set.", required = true)
+        @PathParam("id") String id,
+
+        @ApiParam(value = "The payment to create. If the cart belongs to a customer, the customer id must be set.", required = true)
+        PaymentWrapper paymentWrapper,
+
+        @ApiParam(value = ACCEPT_LANGUAGE_DESC)
+        @HeaderParam(ACCEPT_LANGUAGE) String acceptLanguage);
+
+    @POST
+    @Path("/{id}/payments")
+    @ApiOperation(value = "Creates a payment for this shopping cart.")
+    @ApiResponses(value = {
+        @ApiResponse(code = HTTP_OK, message = HTTP_OK_MESSAGE, response = Cart.class),
+        @ApiResponse(code = HTTP_BAD_REQUEST, message = HTTP_BAD_REQUEST_MESSAGE, response = ErrorResponse.class),
+        @ApiResponse(code = HTTP_FORBIDDEN, message = HTTP_FORBIDDEN_MESSAGE, response = ErrorResponse.class),
+        @ApiResponse(code = HTTP_NOT_FOUND, message = HTTP_NOT_FOUND_MESSAGE, response = ErrorResponse.class)
+    })
+    @Consumes(MediaType.APPLICATION_JSON)
+    Cart postPayments(
         @ApiParam(value = "The ID of the cart for which the payment will be set.", required = true)
         @PathParam("id") String id,
 
@@ -348,7 +369,7 @@ public interface CartApi {
         @HeaderParam(ACCEPT_LANGUAGE) String acceptLanguage);
 
     @DELETE
-    @Path("/{id}/payment/{paymentId}")
+    @Path("/{id}/payments/{paymentId}")
     @ApiOperation(value = "Removes the payment with the given ID from the shopping cart.")
     @ApiResponses(value = {
         @ApiResponse(code = HTTP_OK, message = HTTP_OK_MESSAGE, response = Cart.class),
@@ -356,7 +377,7 @@ public interface CartApi {
         @ApiResponse(code = HTTP_FORBIDDEN, message = HTTP_FORBIDDEN_MESSAGE, response = ErrorResponse.class),
         @ApiResponse(code = HTTP_NOT_FOUND, message = HTTP_NOT_FOUND_MESSAGE, response = ErrorResponse.class)
     })
-    Cart deletePayment(
+    Cart deletePayments(
         @ApiParam(value = "The ID of the cart for which the payment will be deleted.", required = true)
         @PathParam("id") String id,
 
